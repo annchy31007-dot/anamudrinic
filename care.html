@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARE by Ana Mudrinić | Nursing Assistant & Healthcare Professional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #0f172a;
+            --darker: #020617;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--darker);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 5% 4rem;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-content .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--gray);
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .specialty {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--light);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .card p {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-item {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .skill-item:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+        }
+
+        .contact-container {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(99, 102, 241, 0.2);
+            color: var(--gray);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 5rem 5% 3rem;
+            }
+
+            section {
+                padding: 4rem 5%;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <nav>
+        <div class="logo">CARE</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Ana Mudrinić</h1>
+            <p class="subtitle">Nursing Assistant & Healthcare Support Professional</p>
+            <div class="specialty">✨ Specialized in Nutrition, Hydration & Patient Care</div>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="#expertise" class="btn btn-secondary">View Expertise</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">Dedicated to Care</h2>
+        <p class="section-subtitle">Providing compassionate, professional healthcare support with specialized expertise</p>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">💙</div>
+                <h3>Patient-Centered Care</h3>
+                <p>Committed to delivering personalized, compassionate care that prioritizes patient comfort, dignity, and well-being in every interaction.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Clinical Excellence</h3>
+                <p>Maintaining the highest standards of healthcare delivery through continuous professional development and evidence-based practices.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤝</div>
+                <h3>Collaborative Approach</h3>
+                <p>Working seamlessly with healthcare teams to ensure optimal patient outcomes and comprehensive care coordination.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="expertise">
+        <h2 class="section-title">Core Expertise</h2>
+        <p class="section-subtitle">Specialized skills in essential healthcare domains</p>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">🥗</div>
+                <h3>Nutrition Management</h3>
+                <p>Expert in assessing nutritional needs, implementing specialized diets, and monitoring patient intake to support recovery and overall health.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💧</div>
+                <h3>Hydration Support</h3>
+                <p>Skilled in maintaining optimal hydration levels, recognizing dehydration signs, and implementing appropriate fluid management protocols.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏥</div>
+                <h3>Patient Care</h3>
+                <p>Comprehensive daily care including vital signs monitoring, mobility assistance, personal hygiene support, and comfort measures.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Health Monitoring</h3>
+                <p>Accurate documentation and reporting of patient conditions, changes, and responses to care interventions.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Safety & Infection Control</h3>
+                <p>Strict adherence to infection prevention protocols and safety procedures to protect patients and healthcare staff.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">💬</div>
+                <h3>Communication</h3>
+                <p>Clear, empathetic communication with patients, families, and healthcare teams to ensure coordinated, quality care.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Professional Skills</h2>
+        <p class="section-subtitle">Comprehensive healthcare competencies</p>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <span class="skill-icon">✓</span>
+                <span>Vital Signs Monitoring</span>
+            </div>
+            <div class="skill-item">
+                <span class="skill-icon">✓</span>
+                <span>Medication Administration Support</span>
+            </div>
+            <div class="skill-item">
+                <span class="skill-icon">✓</span>
+                <span>Wound Care Assistance</span>
+            </div>
+            <div class="skill-item">
+                <span class="skill-icon">✓</span>
+                <span>Mobility & Transfer Techniques</span>
+            </div>
+            <div class="skill-item">
+                <span class="skill-icon">✓</span>
+                <span>Electronic Health Records</span>
+            </div>
+            <div class="skill-item">
+                <span class="skill-icon">✓</span>
+                <span>Emergency Response</span>
+            </div>
+            <div class="skill-item">
+                <span class="skill-icon">✓</span>
+                <span>Patient Education</span>
+            </div>
+            <div class="skill-item">
+                <span class="skill-icon">✓</span>
+                <span>Cultural Competency</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p class="section-subtitle">Interested in working together or learning more?</p>
+        <div class="contact-container">
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">I'm always open to discussing healthcare opportunities, collaborations, or answering any questions about my experience and expertise.</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span style="font-size: 1.5rem;">📧</span>
+                    <a href="mailto:ana.mudrinic@email.com">ana.mudrinic@email.com</a>
+                </div>
+                <div class="contact-item">
+                    <span style="font-size: 1.5rem;">💼</span>
+                    <span>Available for Healthcare Opportunities</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Ana Mudrinić. All rights reserved.</p>
+        <p style="margin-top: 0.5rem;">Nursing Assistant & Healthcare Support Professional</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .skill-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
